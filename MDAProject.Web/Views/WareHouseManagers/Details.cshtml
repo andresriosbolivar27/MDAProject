@@ -1,0 +1,129 @@
+﻿@model MDAProject.Web.Data.Entities.WareHouseManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Warehouse Manager</h2>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Document)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Document)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="AddMovement" asp-route-id="@Model.Id" class="btn btn-primary">Add Movement</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
+</div>
+@if (Model.Movements.Count == 0)
+{
+    <h5>Not properties added yet.</h5>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Movements</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Code Integral
+                                </th>
+                                <th>
+                                    Device Type
+                                </th>
+                                <th>
+                                   Movement Type
+                                </th>
+                                <th>
+                                    Responsible
+                                </th>
+                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Movements)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateMovement)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.CodeIntegral)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.DeviceType.DeviceTypeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MovementType.MovementTypeName)
+                                    </td>
+                                    <td>
+                                        @if (item.Assistant == null)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.WarehouseManager.User.FullName)
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Assistant.User.FullName)
+                                        }
+
+                                    </td>                                    
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

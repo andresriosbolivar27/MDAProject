@@ -26,13 +26,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MDAProject.Web</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">My Leasing</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+                    {
+                        <li><a asp-area="" asp-controller="WareHouseManagers" asp-action="Index">WareHouse Managers</a></li>
+                        <li><a asp-area="" asp-controller="Warehouses" asp-action="Index">WareHouses</a></li>
+                        <li><a asp-area="" asp-controller="DeviceTypes" asp-action="Index">Device Types</a></li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@User.Identity.Name</a></li>
+                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -44,7 +58,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - MDAProject.Web</p>
+            <p>&copy; 2019 - MDAProject</p>
         </footer>
     </div>
 

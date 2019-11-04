@@ -23,7 +23,9 @@ namespace MDAProject.Web.Data.Entities
 
         [Display(Name = "Warehouse Manager")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
-        public WarehouseManager WarehouseManager { get; set; }
+        public WareHouseManager WarehouseManager { get; set; }
+
+        public ICollection<Device> Devices { get; set; }
 
 
 

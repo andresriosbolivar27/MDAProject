@@ -14,7 +14,7 @@ namespace MDAProject.Web.Data
         {
         }
 
-        public DbSet<Manager> Administrators { get; set; }
+        public DbSet<Manager> Managers { get; set; }
 
         public DbSet<Assistant> Assistants { get; set; }
 
@@ -32,6 +32,6 @@ namespace MDAProject.Web.Data
 
         public DbSet<Warehouse> Warehouses { get; set; }
 
-        public DbSet<WarehouseManager> WarehouseManagers { get; set; }
+        public DbSet<WareHouseManager> WareHouseManagers { get; set; }
     }
 }

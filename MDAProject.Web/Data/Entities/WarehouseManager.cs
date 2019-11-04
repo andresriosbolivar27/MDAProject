@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MDAProject.Web.Data.Entities
 {
-    public class WarehouseManager
+    public class WareHouseManager
     {
         public int Id { get; set; }
 

@@ -11,7 +11,7 @@ namespace MDAProject.Web.Data.Entities
 
         public Device Device { get; set; }
         public Assistant Assistant { get; set; }
-        public WarehouseManager WarehouseManager { get; set; }
+        public WareHouseManager WarehouseManager { get; set; }
 
         public MovementType MovementType { get; set; }
 
