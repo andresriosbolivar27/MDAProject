@@ -129,10 +129,10 @@ namespace MDAProject.Web.Controllers
         //    return View(model);
         //}
 
-        /*
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(AddUserViewModel model)
+       /* public async Task<IActionResult> Register(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
