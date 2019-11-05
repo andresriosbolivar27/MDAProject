@@ -148,6 +148,7 @@ namespace MDAProject.Web.Controllers
                         $"</tr>" +
                         $"</table>");
 
+                    ViewBag.Message = "The instructions to allow your user has been sent to email.";
                     return RedirectToAction("Index");
                 }
 

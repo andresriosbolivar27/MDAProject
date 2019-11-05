@@ -40,7 +40,9 @@ namespace MDAProject.Web.Data.Entities
 
         public ICollection<Movement> Movements { get; set; }
 
-        
+        public ICollection<DeviceImage> DeviceImages { get; set; }
+
+
 
     }
 }
