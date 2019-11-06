@@ -149,7 +149,7 @@ namespace MDAProject.Web.Controllers
                         $"</table>");
 
                     ViewBag.Message = "The instructions to allow your user has been sent to email.";
-                    return RedirectToAction("Index");
+                    return View(model);
                 }
 
                 ModelState.AddModelError(string.Empty, "User with this eamil already exists.");
@@ -190,47 +190,50 @@ namespace MDAProject.Web.Controllers
                 return NotFound();
             }
 
-            var wareHouseManager = await _dataContext.WareHouseManagers.FindAsync(id);
+            var wareHouseManager = await _dataContext.WareHouseManagers
+                .Include(w => w.User)
+                .Include(w => w.Inventories)
+                .Include(w => w.Movements)
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (wareHouseManager == null)
             {
                 return NotFound();
             }
-            return View(wareHouseManager);
+
+            var model = new EditUserViewModel
+            {
+                Address = wareHouseManager.User.Address,
+                Document = wareHouseManager.User.Document,
+                FirstName = wareHouseManager.User.FirstName,
+                Id = wareHouseManager.Id,
+                LastName = wareHouseManager.User.LastName,
+                PhoneNumber = wareHouseManager.User.PhoneNumber
+            };
+            return View(model);
         }
 
-        // POST: WareHouseManagers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] WareHouseManager wareHouseManager)
+        public async Task<IActionResult> Edit(EditUserViewModel model)
         {
-            if (id != wareHouseManager.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _dataContext.Update(wareHouseManager);
-                    await _dataContext.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WareHouseManagerExists(wareHouseManager.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var wareHouseManager = await _dataContext.WareHouseManagers
+                    .Include(o => o.User)
+                    .FirstOrDefaultAsync(o => o.Id == model.Id);
+
+                wareHouseManager.User.Document = model.Document;
+                wareHouseManager.User.FirstName = model.FirstName;
+                wareHouseManager.User.LastName = model.LastName;
+                wareHouseManager.User.Address = model.Address;
+                wareHouseManager.User.PhoneNumber = model.PhoneNumber;
+
+                await _userHelper.UpdateUserAsync(wareHouseManager.User);
                 return RedirectToAction(nameof(Index));
             }
-            return View(wareHouseManager);
+
+            return View(model);
         }
 
         // GET: WareHouseManagers/Delete/5
@@ -242,13 +245,29 @@ namespace MDAProject.Web.Controllers
             }
 
             var wareHouseManager = await _dataContext.WareHouseManagers
+                .Include(w => w.User)
+                .Include(w => w.Inventories)
+                .Include(w => w.Movements)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (wareHouseManager == null)
             {
                 return NotFound();
             }
 
-            return View(wareHouseManager);
+            if (wareHouseManager.Inventories.Count != 0)
+            {
+                ModelState.AddModelError(string.Empty, "Warehouse Manager can't be delete because it has Inventories.");
+                return RedirectToAction($"{nameof(Details)}/{wareHouseManager.Id}");
+            }
+            if (wareHouseManager.Movements.Count != 0)
+            {
+                ModelState.AddModelError(string.Empty, "Warehouse Manager can't be delete because it has Movements.");
+                return RedirectToAction($"{nameof(Details)}/{wareHouseManager.Id}");
+            }
+            _dataContext.WareHouseManagers.Remove(wareHouseManager);
+            await _dataContext.SaveChangesAsync();
+            await _userHelper.DeleteUserAsync(wareHouseManager.User.Email);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: WareHouseManagers/Delete/5
