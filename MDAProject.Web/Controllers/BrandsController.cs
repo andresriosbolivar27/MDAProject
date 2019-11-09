@@ -7,27 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MDAProject.Web.Data;
 using MDAProject.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace MDAProject.Web.Controllers
 {
-    [Authorize(Roles = "Manager, WareHouseManager")]
-    public class WarehousesController : Controller
+    public class BrandsController : Controller
     {
         private readonly DataContext _context;
 
-        public WarehousesController(DataContext context)
+        public BrandsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Warehouses
+        // GET: Brands
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Warehouses.ToListAsync());
+            return View(await _context.Brands.ToListAsync());
         }
 
-        // GET: Warehouses/Details/5
+        // GET: Brands/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,49 +33,39 @@ namespace MDAProject.Web.Controllers
                 return NotFound();
             }
 
-            var warehouse = await _context.Warehouses
-                .Include(i => i.Inventories)
-                .ThenInclude(wm => wm.WarehouseManager)
-                .ThenInclude(i => i.Inventories)
-                .ThenInclude(d => d.Devices)
-                .ThenInclude(b => b.Brand)
-                .ThenInclude(d => d.Devices)
-                .ThenInclude(dt => dt.DeviceType)
-                .ThenInclude(d => d.Devices)
-                .ThenInclude(m => m.Movements)
-                .ThenInclude(mt => mt.MovementType)
-                .FirstOrDefaultAsync(m => m.Id == id);            
-            if (warehouse == null)
+            var brand = await _context.Brands
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            return View(warehouse);
+            return View(brand);
         }
 
-        // GET: Warehouses/Create
+        // GET: Brands/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Warehouses/Create
+        // POST: Brands/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,WarehouseName")] Warehouse warehouse)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Brand brand)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(warehouse);
+                _context.Add(brand);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(warehouse);
+            return View(brand);
         }
 
-        // GET: Warehouses/Edit/5
+        // GET: Brands/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,22 +73,22 @@ namespace MDAProject.Web.Controllers
                 return NotFound();
             }
 
-            var warehouse = await _context.Warehouses.FindAsync(id);
-            if (warehouse == null)
+            var brand = await _context.Brands.FindAsync(id);
+            if (brand == null)
             {
                 return NotFound();
             }
-            return View(warehouse);
+            return View(brand);
         }
 
-        // POST: Warehouses/Edit/5
+        // POST: Brands/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,WarehouseName")] Warehouse warehouse)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Brand brand)
         {
-            if (id != warehouse.Id)
+            if (id != brand.Id)
             {
                 return NotFound();
             }
@@ -109,12 +97,12 @@ namespace MDAProject.Web.Controllers
             {
                 try
                 {
-                    _context.Update(warehouse);
+                    _context.Update(brand);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WarehouseExists(warehouse.Id))
+                    if (!BrandExists(brand.Id))
                     {
                         return NotFound();
                     }
@@ -125,10 +113,10 @@ namespace MDAProject.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(warehouse);
+            return View(brand);
         }
 
-        // GET: Warehouses/Delete/5
+        // GET: Brands/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,30 +124,30 @@ namespace MDAProject.Web.Controllers
                 return NotFound();
             }
 
-            var warehouse = await _context.Warehouses
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (warehouse == null)
+            if (brand == null)
             {
                 return NotFound();
             }
 
-            return View(warehouse);
+            return View(brand);
         }
 
-        // POST: Warehouses/Delete/5
+        // POST: Brands/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var warehouse = await _context.Warehouses.FindAsync(id);
-            _context.Warehouses.Remove(warehouse);
+            var brand = await _context.Brands.FindAsync(id);
+            _context.Brands.Remove(brand);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool WarehouseExists(int id)
+        private bool BrandExists(int id)
         {
-            return _context.Warehouses.Any(e => e.Id == id);
+            return _context.Brands.Any(e => e.Id == id);
         }
     }
 }

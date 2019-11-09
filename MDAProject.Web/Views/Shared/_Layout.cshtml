@@ -30,12 +30,51 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
                     {
-                        <li><a asp-area="" asp-controller="WareHouseManagers" asp-action="Index">WareHouse Managers</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Maintenance Devices <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Devices" asp-action="Index">Devices</a></li>
+                                <li><a asp-area="" asp-controller="DeviceTypes" asp-action="Index">Device Types</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Maintenance Devices <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="Devices" asp-action="Index">Devices</a></li>
+                                <li><a asp-area="" asp-controller="DeviceTypes" asp-action="Index">Device Types</a></li>
+                                <li><a asp-area="" asp-controller="Brands" asp-action="Index">Brands</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Maintenance Users <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="" asp-controller="WareHouseManagers" asp-action="Index">WareHouse Managers</a></li>
+                            </ul>
+                        </li>
+                        <li><a asp-area="" asp-controller="Warehouses" asp-action="Index">WareHouses</a></li>
+                    }
+
+                    @if (User.IsInRole("WareHouseManager"))
+                    {
+                        <li><a asp-area="" asp-controller="" asp-action="Index">Movements</a></li>
                         <li><a asp-area="" asp-controller="Warehouses" asp-action="Index">WareHouses</a></li>
                         <li><a asp-area="" asp-controller="Devices" asp-action="Index">Devices</a></li>
                         <li><a asp-area="" asp-controller="DeviceTypes" asp-action="Index">Device Types</a></li>
+                    }
+
+                    @if (User.IsInRole("Assistant"))
+                    {
+                        <li><a asp-area="" asp-controller="" asp-action="Index">Movements</a></li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

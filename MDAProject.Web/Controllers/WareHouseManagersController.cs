@@ -72,6 +72,29 @@ namespace MDAProject.Web.Controllers
             return View(wareHouseManager);
         }
 
+        public async Task<IActionResult> DetailsMovement(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var wareHouseManager = await _dataContext.WareHouseManagers
+                .Include(w => w.User)
+                .Include(i => i.Inventories)
+                .ThenInclude(d => d.Devices)
+                .ThenInclude(dt => dt.DeviceType)
+                .Include(m => m.Movements)
+                .ThenInclude(mt => mt.MovementType)
+                .FirstOrDefaultAsync(w => w.Id == id);
+            if (wareHouseManager == null)
+            {
+                return NotFound();
+            }
+
+            return View(wareHouseManager);
+        }
+
         // GET: WareHouseManagers/Create
         public IActionResult Create()
         {
@@ -257,12 +280,12 @@ namespace MDAProject.Web.Controllers
             if (wareHouseManager.Inventories.Count != 0)
             {
                 ModelState.AddModelError(string.Empty, "Warehouse Manager can't be delete because it has Inventories.");
-                return RedirectToAction($"{nameof(Details)}/{wareHouseManager.Id}");
+                return RedirectToAction(nameof(Index));
             }
             if (wareHouseManager.Movements.Count != 0)
             {
                 ModelState.AddModelError(string.Empty, "Warehouse Manager can't be delete because it has Movements.");
-                return RedirectToAction($"{nameof(Details)}/{wareHouseManager.Id}");
+                return RedirectToAction(nameof(Index));
             }
             _dataContext.WareHouseManagers.Remove(wareHouseManager);
             await _dataContext.SaveChangesAsync();

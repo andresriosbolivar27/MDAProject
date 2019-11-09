@@ -16,6 +16,5 @@ namespace MDAProject.Web.Data.Entities
         public string WarehouseName { get; set; }
 
         public ICollection<Inventory> Inventories { get; set; }
-        public ICollection<Device> Devices { get; set; }
     }
 }
