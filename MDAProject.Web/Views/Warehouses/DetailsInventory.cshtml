@@ -1,0 +1,118 @@
+﻿@model MDAProject.Web.Data.Entities.Inventory
+
+
+@{
+    ViewData["Title"] = "Details Inventory";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<br />
+<hr />
+<h2>Details Inventory</h2>
+<h4>@Html.DisplayFor(model => model.DateInventaryLocal)</h4>
+
+<div>
+    <hr />
+    <h4>Warehouse Details</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            Warehouse
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Warehouse.WarehouseName)
+        </dd>
+        <dt>
+            Responsible
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WarehouseManager.User.FullName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+
+    <a asp-action="AddDeviceToInventory" asp-route-id="@Model.Id" class="btn btn-primary"><i class="fas fa-plus-square"></i></a>
+    <a asp-action="Details" asp-route-id="@Model.Id"class="btn btn-success">Back to List</a>
+</div>
+<hr />
+@if (Model.Devices.Count == 0)
+{
+    <h5>Not devices added yet.</h5>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Devices</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover table-responsive table-striped" id="MyTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Code Integral
+                                </th>
+                                <th>
+                                    Code Valorar
+                                </th>
+                                <th>
+                                    Serial Number
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    Active
+                                </th>
+                                <th>
+                                    Device Type
+                                </th>
+                                <th>
+                                    Movement Type
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.WarehouseManager.Movements)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.CodeIntegral)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.CodeValorar)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.SerialNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.Brand.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Device.DeviceType.DeviceTypeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MovementType.MovementTypeName)
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditProperty" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i> </a>
+                                        <a asp-action="DetailsProperty" asp-route-id="@item.Id" class="btn btn-default"><i class="fas fa-list"></i> </a>
+                                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

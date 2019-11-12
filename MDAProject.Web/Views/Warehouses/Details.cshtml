@@ -3,15 +3,15 @@
 @{
     ViewData["Title"] = "Details";
 }
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
-<h2>Details</h2>
+<h2>Warehouse Details</h2>
 
 <div>
-    <h4>Warehouse</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.WarehouseName)
+            Warehouse
         </dt>
         <dd>
             @Html.DisplayFor(model => model.WarehouseName)
@@ -19,9 +19,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+    <button data-id="@Model.Id" class="btn btn-primary addItem" data-toggle="modal" data-target="#AddDialog"><i class="fas fa-plus-square"></i></button>
+    <a asp-action="Index" class="btn btn-success">Back to list</a>
 </div>
+<hr />
 @if (Model.Inventories.Count == 0)
 {
     <h5>Not Inventaries added yet.</h5>
@@ -40,13 +42,13 @@ else
                         <thead>
                             <tr>
                                 <th>
-                                   Date
+                                    Date
                                 </th>
                                 <th>
-                                   Responsible
+                                    Responsible
                                 </th>
                                 <th>
-                                   Devices
+                                    Devices
                                 </th>
                                 <th></th>
                             </tr>
@@ -64,10 +66,9 @@ else
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Devices.Count)
                                     </td>
-                                    
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                        <a asp-action="DetailsInventory" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-list"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -77,4 +78,46 @@ else
             </div>
         </div>
     </div>
+}
+<!--Add Item-->
+<div class="modal fade" id="AddDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Inventory</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to add a inventory?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnYesAdd">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+
+            // Add item
+            var warehouseAddToInventory;
+
+            $('.addItem').click((e) => {
+                warehouseAddToInventory = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesAdd").click(function () {
+                window.location.href = '/Warehouses/AddInventory/' + warehouseAddToInventory;
+            });
+        });
+    </script>
 }

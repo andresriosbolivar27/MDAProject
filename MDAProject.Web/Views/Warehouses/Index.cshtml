@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <h2>Index</h2>
 
 <p>
@@ -25,9 +25,9 @@
                 @Html.DisplayFor(modelItem => item.WarehouseName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i> </a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fas fa-list"></i> </a>
+                <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="far fa-trash-alt"></i></button>
             </td>
         </tr>
 }

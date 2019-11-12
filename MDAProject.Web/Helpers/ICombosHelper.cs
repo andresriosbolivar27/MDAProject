@@ -10,8 +10,11 @@ namespace MDAProject.Web.Helpers
     {
         IEnumerable<SelectListItem> GetComboPropertyTypes();
 
-        IEnumerable<SelectListItem> GetComboLessees();
+        IEnumerable<SelectListItem> GetComboAssistents();
 
         IEnumerable<SelectListItem> GetComboRoles();
+        IEnumerable<SelectListItem> GetComboDevices();
+        IEnumerable<SelectListItem> GetComboBrands();
+        IEnumerable<SelectListItem> GetComboMovementTypes();
     }
 }

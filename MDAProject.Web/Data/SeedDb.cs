@@ -44,6 +44,11 @@ namespace MDAProject.Web.Data
         {
             var warehosemanager = _context.WareHouseManagers.FirstOrDefault();
             var warehose = _context.Warehouses.FirstOrDefault();
+            //var warehosemanager1 = _context.WareHouseManagers.Last();
+            //var warehose1 = _context.Warehouses.FirstOrDefault();
+
+            //AddInventory(warehose1, warehosemanager1);
+            //await _context.SaveChangesAsync();
 
             if (!_context.Inventories.Any())
             {

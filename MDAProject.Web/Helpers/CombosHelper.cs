@@ -16,7 +16,7 @@ namespace MDAProject.Web.Helpers
             _dataContext = dataContext;
         }
 
-        public IEnumerable<SelectListItem> GetComboLessees()
+        public IEnumerable<SelectListItem> GetComboAssistents()
         {
             var list = _dataContext.Assistants.Select(l => new SelectListItem
             {
@@ -28,7 +28,64 @@ namespace MDAProject.Web.Helpers
 
             list.Insert(0, new SelectListItem
             {
-                Text = "(Select a lessee...)",
+                Text = "(Select a assistent...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboDevices()
+        {
+            var list = _dataContext.Devices.Select(d => new SelectListItem
+            {
+                Text = $"{d.CodeIntegral} - {d.DeviceType.DeviceTypeName}" ,
+                Value = $"{d.Id}"
+            })
+                .OrderBy(pt => pt.Text)
+                .ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select a device...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboBrands ()
+        {
+            var list = _dataContext.Brands.Select(b => new SelectListItem
+            {
+                Text = $"{b.Name}",
+                Value = $"{b.Id}"
+            })
+                .OrderBy(pt => pt.Text)
+                .ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select a brand...)",
+                Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetComboMovementTypes()
+        {
+            var list = _dataContext.MovementTypes.Select(b => new SelectListItem
+            {
+                Text = $"{b.MovementTypeName}",
+                Value = $"{b.Id}"
+            })
+                .OrderBy(pt => pt.Text)
+                .ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select a Movement Type...)",
                 Value = "0"
             });
 

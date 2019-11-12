@@ -1,0 +1,45 @@
+﻿@model MDAProject.Web.Models.DeviceViewModel
+
+<div class="form-group">
+    <label asp-for="DeviceId" class="control-label">Device</label>
+    <select asp-for="DeviceId" asp-items="Model.ListDevices" class="form-control"></select>
+    <span asp-validation-for="DeviceId" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="CodeIntegral" class="control-label"></label>
+    <input asp-for="CodeIntegral" class="form-control" />
+    <span asp-validation-for="CodeIntegral" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="CodeValorar" class="control-label"></label>
+    <input asp-for="CodeValorar" class="form-control" />
+    <span asp-validation-for="CodeValorar" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="SerialNumber" class="control-label"></label>
+    <input asp-for="SerialNumber" class="form-control" />
+    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="BrandId" class="control-label">Brand</label>
+    <select asp-for="BrandId" asp-items="Model.ListBrands" class="form-control"></select>
+    <span asp-validation-for="BrandId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="MovementTypeId" class="control-label">Movement</label>
+    <select asp-for="MovementTypeId" asp-items="Model.ListMovements" class="form-control"></select>
+    <span asp-validation-for="MovementTypeId" class="text-danger"></span>
+</div>
+
+
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+        </label>
+    </div>
+</div>
