@@ -23,5 +23,18 @@
             </div>
         </form>
     </div>
+    <div class="col-md-4">
+        <form asp-page="/Warehouses/AddDeviceToInventory" method="get">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="WareHouseId" />
+            <input type="hidden" asp-for="WareHouseManagerId" />
+            <br />
+            <div class="col-md-3">
+                <div class="form-group" style="margin-top:4px">
+                    <a asp-action="LoadDevice" asp-route-id="@Model.DeviceId" class="btn btn-info">Load Device</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 

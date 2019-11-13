@@ -34,7 +34,7 @@
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
 
     <a asp-action="AddDeviceToInventory" asp-route-id="@Model.Id" class="btn btn-primary"><i class="fas fa-plus-square"></i></a>
-    <a asp-action="Details" asp-route-id="@Model.Id"class="btn btn-success">Back to List</a>
+    <a asp-action="Details" asp-route-id="@Model.Warehouse.Id"class="btn btn-success">Back to List</a>
 </div>
 <hr />
 @if (Model.Devices.Count == 0)

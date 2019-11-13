@@ -155,9 +155,39 @@ namespace MDAProject.Web.Controllers
                 ListDevices = _combosHelper.GetComboDevices(),
                 ListBrands = _combosHelper.GetComboBrands(),
                 ListMovements = _combosHelper.GetComboMovementTypes(),
+                InventoryId = inventory.Id
             };
 
             return View(model);
+        }
+
+        
+        public IActionResult LoadDevice(int? id)
+        {
+
+            var model = new DeviceViewModel
+            {
+                //WareHouseId = inventory.Warehouse.Id,
+                //WareHouseManagerId = inventory.WarehouseManager.Id,
+                //DateInventary = DateTime.Today,
+                //ListDevices = _combosHelper.GetComboDevices(),
+                //ListBrands = _combosHelper.GetComboBrands(),
+                //ListMovements = _combosHelper.GetComboMovementTypes(),
+                //InventoryId = inventory.Id
+            };
+
+            return View(model);
+
+            //if (ModelState.IsValid)
+            //{
+            //    var inventory = await _converterHelper.ToInventoryAsync(model, true);
+            //    _dataContext.Inventories.Add(inventory);
+            //    await _dataContext.SaveChangesAsync();
+            //    return RedirectToAction($"{nameof(Details)}/{model.Warehouse.Id}");
+            //}
+
+            ////model.Lessees = _combosHelper.GetComboLessees();
+            //return View(model);
         }
 
         [HttpPost]

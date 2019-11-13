@@ -1,7 +1,8 @@
 ﻿@model MDAProject.Web.Models.DeviceViewModel
 
+
 <div class="form-group">
-    <label asp-for="DeviceId" class="control-label">Device</label>
+    <label asp-for="DeviceId" class="control-label">Device</label>    
     <select asp-for="DeviceId" asp-items="Model.ListDevices" class="form-control"></select>
     <span asp-validation-for="DeviceId" class="text-danger"></span>
 </div>
