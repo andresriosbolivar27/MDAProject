@@ -4,6 +4,11 @@ using MDAProject.Prism.ViewModels;
 using MDAProject.Prism.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Newtonsoft.Json;
+using MDAProject.Common.Models;
+using MDAProject.Common.Helpers;
+using System;
+using MDAProject.Common.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MDAProject.Prism
@@ -21,13 +26,22 @@ namespace MDAProject.Prism
 
         protected override async void OnInitialized()
         {
-            InitializeComponent();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTU2MDkwQDMxMzcyZTMyMmUzMGp0RjlKamdCS1g4a1kvYllaWDNzNm9EWFArTWQzbzVZUGhCbVhNUUs3VlU9"); InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
+            {
+                await NavigationService.NavigateAsync("/WareHouseTabbedPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<WareHouseTabbedPage, WareHouseTabbedPageViewModel>();
