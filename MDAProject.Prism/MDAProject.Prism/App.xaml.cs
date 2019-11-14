@@ -23,13 +23,16 @@ namespace MDAProject.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<WareHouseTabbedPage, WareHouseTabbedPageViewModel>();
+            containerRegistry.RegisterForNavigation<InventoryPage, InventoryPageViewModel>();
+            containerRegistry.RegisterForNavigation<DevicesPage, DevicesPageViewModel>();
         }
     }
 }
