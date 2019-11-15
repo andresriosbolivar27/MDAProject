@@ -21,9 +21,9 @@ namespace MDAProject.Common.Models
 
         public InventoryResponse Inventory { get; set; }
 
-        public BrandResponse Brand { get; set; }
+        public string Brand { get; set; }
 
-        public DeviceTypeResponse DeviceType { get; set; }
+        public string DeviceType { get; set; }
         public WareHouseResponse Warehouse { get; set; }
 
         public ICollection<MovementResponse> Movements { get; set; }
