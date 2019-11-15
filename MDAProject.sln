@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDAProject.Common", "MDAPro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDAProject.Web", "MDAProject.Web\MDAProject.Web.csproj", "{D51D5108-1682-4226-8A8E-A27AC4125D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDAProject.Prism", "MDAProject.Prism\MDAProject.Prism\MDAProject.Prism.csproj", "{9F4DD3CA-5E0F-4A6D-A0BF-E737C378026A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MDAProject.Prism", "MDAProject.Prism\MDAProject.Prism\MDAProject.Prism.csproj", "{9F4DD3CA-5E0F-4A6D-A0BF-E737C378026A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDAProject.Prism.Android", "MDAProject.Prism\MDAProject.Prism.Android\MDAProject.Prism.Android.csproj", "{D5E54CD2-D140-47F1-9458-24FC61D9FA91}"
 EndProject
@@ -162,6 +162,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_PrefixTranslations = False
 		SolutionGuid = {7B68BC05-C30E-4CAC-9228-DD157B9643AC}
 	EndGlobalSection
 EndGlobal

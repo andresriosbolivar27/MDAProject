@@ -18,23 +18,23 @@ namespace MDAProject.Web.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly IUserHelper _userHelper;
-        //private readonly ICombosHelper _combosHelper;
-        //private readonly IConverterHelper _converterHelper;
+        private readonly ICombosHelper _combosHelper;
+        private readonly IConverterHelper _converterHelper;
         //private readonly IImageHelper _imageHelper;
         private readonly IMailHelper _mailHelper;
 
         public WareHouseManagersController(
             DataContext dataContext,
             IUserHelper userHelper,
-            //ICombosHelper combosHelper,
-            //IConverterHelper converterHelper,
+            ICombosHelper combosHelper,
+            IConverterHelper converterHelper,
             //IImageHelper imageHelper,
             IMailHelper mailHelper)
         {
             _dataContext = dataContext;
             _userHelper = userHelper;
-            //_combosHelper = combosHelper;
-            //_converterHelper = converterHelper;
+            _combosHelper = combosHelper;
+            _converterHelper = converterHelper;
             //_imageHelper = imageHelper;
             _mailHelper = mailHelper;
         }

@@ -3,8 +3,8 @@ using MDAProject.Prism.Interfaces;
 using System.Globalization;
 using System.Threading;
 
-[assembly: Xamarin.Forms.Dependency(typeof(MyLeasing.Prism.Droid.Implementations.Localize))]
-namespace MyLeasing.Prism.Droid.Implementations
+[assembly: Xamarin.Forms.Dependency(typeof(MDAProject.Prism.Droid.Implementations.Localize))]
+namespace MDAProject.Prism.Droid.Implementations
 {
     public class Localize : ILocalize
     {

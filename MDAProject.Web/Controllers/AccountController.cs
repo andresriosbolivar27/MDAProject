@@ -20,14 +20,14 @@ namespace MDAProject.Web.Controllers
         private readonly DataContext _dataContext;
         private readonly IUserHelper _userHelper;
         private readonly IConfiguration _configuration;
-        //private readonly ICombosHelper _combosHelper;
+        private readonly ICombosHelper _combosHelper;
         private readonly IMailHelper _mailHelper;
 
         public AccountController(
             DataContext dataContext,
             IUserHelper userHelper,
             IConfiguration configuration,
-            //ICombosHelper combosHelper,
+            ICombosHelper combosHelper,
             IMailHelper mailHelper)
         {
             _dataContext = dataContext;
