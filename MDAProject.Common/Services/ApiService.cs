@@ -115,5 +115,56 @@ namespace MDAProject.Common.Services
                 };
             }
         }
+
+        public async Task<Response<DeviceResponse>> GetDeviceByWareHouseAsync(
+            string urlBase,
+            string servicePrefix,
+            string controller,
+            string tokenType,
+            string accessToken,
+            int codeWareHouse)
+        {
+            try
+            {
+                //var request = new EmailRequest { Email = codeWareHouse };
+                var requestString = JsonConvert.SerializeObject(codeWareHouse);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+                var url = $"{servicePrefix}{controller}/{requestString}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<DeviceResponse>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var devices = JsonConvert.DeserializeObject<ICollection<DeviceResponse>>(result);
+                return new Response<DeviceResponse>
+                {
+                    IsSuccess = true,
+                    Results = devices
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<DeviceResponse>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+
     }
 }

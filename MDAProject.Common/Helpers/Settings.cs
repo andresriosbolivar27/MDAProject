@@ -9,6 +9,7 @@ namespace MDAProject.Common.Helpers
     public class Settings
     {
         private const string _inventory = "_inventory";
+        private const string _devices = "_devices";
         private const string _token = "token";
         private const string _warehousemanager = "_warehousemanager";
         private const string _isRemembered = "IsRemembered";
@@ -21,6 +22,12 @@ namespace MDAProject.Common.Helpers
         {
             get => AppSettings.GetValueOrDefault(_inventory, _stringDefault);
             set => AppSettings.AddOrUpdateValue(_inventory, value);
+        }
+
+        public static string Devices
+        {
+            get => AppSettings.GetValueOrDefault(_devices, _stringDefault);
+            set => AppSettings.AddOrUpdateValue(_devices, value);
         }
 
         public static string Token

@@ -4,7 +4,83 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MDAProject.Prism.Views.DevicesPage"
-            BackgroundColor="{StaticResource colorBackgroud}"
-            Title="{Binding Title}">
-  
+             BackgroundColor="{StaticResource colorBackgroud}"
+             Title="{Binding Title}">
+
+    <StackLayout
+        Padding="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                Text="Code Integral"/>
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                Text="Code Valorar"/>
+            <Label
+                Grid.Column="2"
+                FontAttributes="Bold"
+                Text="Device Type"/>
+            <Label
+                Grid.Column="3"
+                FontAttributes="Bold"
+                Text="Brand"/>
+        </Grid>
+        <ListView
+            HasUnevenRows="True"
+            ItemsSource="{Binding Devices}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectDeviceCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Text="{Binding CodeIntegral}"
+                                VerticalOptions="Center"/>
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding CodeValorar}"
+                                VerticalOptions="Center"/>
+                            <Label
+                                Grid.Column="2"
+                                Text="{Binding DeviceType}"
+                                VerticalOptions="Center"/>
+                            <Label
+                                Grid.Column="3"
+                                Text="{Binding Brand}"
+                                VerticalOptions="Center"/>
+                            <Image
+                                Grid.Column="4"
+                                Source="ic_more_vert"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
 </ContentPage>

@@ -10,6 +10,6 @@ namespace MDAProject.Common.Models
         
         public string WarehouseName { get; set; }
 
-        public ICollection<InventoryResponse> Inventories { get; set; }
+        public ICollection <DeviceResponse> Devices { get; set; }
     }
 }

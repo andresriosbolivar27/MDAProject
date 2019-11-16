@@ -13,7 +13,6 @@ namespace MDAProject.Common.Models
         public DateTime DateTimeLocal => DateInventory.ToLocalTime();
         public WareHouseResponse Warehouse { get; set; }
 
-        public WareHouseManagerResponse WareHouseManager { get; set; }
 
         public ICollection<DeviceResponse> Devices { get; set; }
 

@@ -19,14 +19,11 @@ namespace MDAProject.Common.Models
 
         public bool IsActive { get; set; }
 
-        public InventoryResponse Inventory { get; set; }
-
         public string Brand { get; set; }
 
         public string DeviceType { get; set; }
-        public WareHouseResponse Warehouse { get; set; }
 
-        public ICollection<MovementResponse> Movements { get; set; }
+        public  ICollection<MovementResponse> Movements { get; set; }
 
         public ICollection<DeviceImageResponse> DeviceImages { get; set; }
 

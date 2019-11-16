@@ -7,9 +7,8 @@ namespace MDAProject.Common.Models
     public class MovementResponse
     {
         public int Id { get; set; }
-
-        public DeviceResponse Device { get; set; }
-        public WareHouseManagerResponse WarehouseManager { get; set; }
+       
+        public string Responsible { get; set; }
 
         public DateTime DateMovement { get; set; }
 

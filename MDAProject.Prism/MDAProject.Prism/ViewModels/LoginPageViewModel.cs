@@ -109,7 +109,8 @@ namespace MDAProject.Prism.ViewModels
             }
 
             var token = response.Result;
-            var response2 = await _apiService.GetWareHoyseManagerByEmailAsync(url, "api", "/Owners/GetWareHoyseManagerByEmail", "bearer", token.Token, Email);
+            var response2 = await _apiService.GetWareHoyseManagerByEmailAsync(url, "api", "/WareHouseManagers/GetWareHouseManagerByEmail", "bearer", token.Token, Email);
+            var devices = await _apiService.GetDeviceByWareHouseAsync(url, "api", "/WareHouseManagers/GetDevicesByWareHouse", "bearer", token.Token, 1);
             if (!response2.IsSuccess)
             {
                 IsRunning = false;
@@ -118,13 +119,14 @@ namespace MDAProject.Prism.ViewModels
                 return;
             }
 
-            var owner = response2.Result;
-
-            Settings.WareHouseManager = JsonConvert.SerializeObject(owner);
+            var warehousemanager = response2.Result;
+            //var devices = warehousemanager.Inventories.
+            Settings.WareHouseManager = JsonConvert.SerializeObject(warehousemanager);
+            Settings.Devices = JsonConvert.SerializeObject(devices);
             Settings.Token = JsonConvert.SerializeObject(token);
             Settings.IsRemembered = IsRemember;
 
-            await _navigationService.NavigateAsync("/LeasingMasterDetailPage/NavigationPage/PropertiesPage");
+            await _navigationService.NavigateAsync("WareHouseTabbedPage");
             IsRunning = false;
             IsEnabled = true;
         }

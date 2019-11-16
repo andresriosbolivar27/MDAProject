@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="MDAProject.Prism.Views.InventoryPage">
+             x:Class="MDAProject.Prism.Views.InventoryPage"
+             BackgroundColor="{StaticResource colorBackgroud}"
+             Title="{Binding Title}">
   
 </ContentPage>

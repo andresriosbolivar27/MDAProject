@@ -8,10 +8,6 @@ namespace MDAProject.Common.Models
     {
         public int Id { get; set; }
 
-        public double Latitude { get; set; }
-
-        public double Longitude { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -25,8 +21,6 @@ namespace MDAProject.Common.Models
         public string Email { get; set; }
 
         public ICollection<InventoryResponse> Inventories { get; set; }
-
-        public ICollection<MovementResponse> Movements { get; set; }
 
         public int RoleId { get; set; }
 

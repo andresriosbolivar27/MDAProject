@@ -30,7 +30,7 @@ namespace MDAProject.Web.Controllers.API
         }
 
         [HttpPost]
-        [Route("GetOwnerByEmail")]
+        [Route("GetWareHouseManagerByEmail")]
         public async Task<IActionResult> GetWareHouseManager(EmailRequest emailRequest)
         {
             try
@@ -55,6 +55,45 @@ namespace MDAProject.Web.Controllers.API
                 return BadRequest(ex);
             }
         }
+
+
+        [HttpGet("GetDevicesByWareHouse/{id}")]
+        
+        public async Task<IActionResult> GetDevices([FromRoute] int id)
+        {
+            var device = await _dataContext.Devices
+                .Include(dt => dt.DeviceType)
+                .Include(b => b.Brand)
+                .Include(i => i.Inventory)
+                .ThenInclude(w => w.Warehouse)
+                .Where(d => d.Warehouse.Id == id).ToListAsync();
+            if (device.Count == 0)
+            {
+                return BadRequest("Device not found.");
+            }
+
+            var response = new List<DeviceResponse>(device.Select(d => new DeviceResponse
+            {
+                Id = d.Id,
+                Brand = d.Brand.Name,
+                CodeIntegral = d.CodeIntegral,
+                CodeValorar = d.CodeValorar,
+                Description = d.Description,
+                DeviceImages = d.DeviceImages?.Select(pi => new DeviceImageResponse
+                {
+                    Id = pi.Id,
+                    ImageUrl = pi.ImageFullPath
+                }).ToList(),
+                DeviceType = d.DeviceType.DeviceTypeName,
+                IsActive = d.IsActive,
+                SerialNumber = d.SerialNumber
+
+            }).ToList());
+            return Ok(response);
+        }
+
+
+
 
         private async Task<IActionResult> GetWareHouseManagerAsync(EmailRequest emailRequest)
         {
@@ -100,30 +139,52 @@ namespace MDAProject.Web.Controllers.API
                         }).ToList(),
                         DeviceType = d.DeviceType.DeviceTypeName,
                         Id = d.Id,
-                        Movements = d.Movements?.Select(m => new MovementResponse
+                        Movements = d.Movements?.Select(m => new MovementResponse 
                         {
-                            Id = m.Id,
                             DateMovement = m.DateMovement,
                             
-                        }),
+                            MovementType = m.MovementType.MovementTypeName,
+                            Responsible = m.WarehouseManager.User.FullName
+                        }).ToList(),
                         SerialNumber = d.SerialNumber
-                    })
+                    }).ToList(),
+                   
 
-                })
+                }).ToList()
+            };
 
             return Ok(response);
         }
 
         private WareHouseResponse ToWareHouseResponse(Warehouse warehouse)
-        {
+        {            
             return new WareHouseResponse
-            {
-                Inventories = (ICollection<InventoryResponse>)warehouse.Inventories,
+            {                
                 WarehouseName = warehouse.WarehouseName
+                
             };
         }
 
+
+        private DeviceResponse ToDeviceResponse(Device device)
+        {
+            return new DeviceResponse
+            {
+                Brand = device.Brand.Name,
+                CodeIntegral = device.CodeIntegral,
+                CodeValorar  = device.CodeValorar,
+                Description = device.Description ,
+                DeviceImages = device.DeviceImages?.Select(pi => new DeviceImageResponse
+                {
+                    Id = pi.Id,
+                    ImageUrl = pi.ImageFullPath
+                }).ToList(),
+                DeviceType = device.DeviceType.DeviceTypeName,
+                SerialNumber = device.SerialNumber,
+            };
+        }
         
+
         private BrandResponse ToBrandResponse(Brand brand)
         { 
             return new BrandResponse

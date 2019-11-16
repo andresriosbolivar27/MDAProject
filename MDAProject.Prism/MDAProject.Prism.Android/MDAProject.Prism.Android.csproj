@@ -117,7 +117,9 @@
       <Name>MDAProject.Prism</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_more_vert.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\mda_splash.png" />
   </ItemGroup>

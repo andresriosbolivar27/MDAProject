@@ -12,7 +12,7 @@ namespace MDAProject.Prism.ViewModels
         public InventoryPageViewModel(
             INavigationService navigationService): base(navigationService)
         {
-            Title = "Inventory";
+            Title = "Inventories";
         }
     }
 }

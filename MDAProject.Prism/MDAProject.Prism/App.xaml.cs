@@ -31,7 +31,8 @@ namespace MDAProject.Prism
             var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
             if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
             {
-                await NavigationService.NavigateAsync("/WareHouseTabbedPage");
+                //await NavigationService.NavigateAsync("/WareHouseTabbedPage");
+                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
             }
             else
             {
