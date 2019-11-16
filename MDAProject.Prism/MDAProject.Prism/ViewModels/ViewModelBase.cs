@@ -37,6 +37,10 @@ namespace MDAProject.Prism.ViewModels
         {
 
         }
+        public virtual void OnNavigatingTo(INavigationParameters parameters)
+        {
+
+        }
 
         public virtual void Destroy()
         {

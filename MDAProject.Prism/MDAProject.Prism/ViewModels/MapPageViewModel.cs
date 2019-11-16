@@ -7,14 +7,11 @@ using System.Linq;
 
 namespace MDAProject.Prism.ViewModels
 {
-    public class InventoryPageViewModel : ViewModelBase
+    public class MapPageViewModel : ViewModelBase
     {
-        public InventoryPageViewModel(
-            INavigationService navigationService): base(navigationService)
+        public MapPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Inventories";
+            Title = "Map";
         }
-
-
     }
 }

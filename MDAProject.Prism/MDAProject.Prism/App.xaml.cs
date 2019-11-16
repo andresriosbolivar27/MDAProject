@@ -29,14 +29,15 @@ namespace MDAProject.Prism
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTU2MDkwQDMxMzcyZTMyMmUzMGp0RjlKamdCS1g4a1kvYllaWDNzNm9EWFArTWQzbzVZUGhCbVhNUUs3VlU9"); InitializeComponent();
 
             var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+
             if (Settings.IsRemembered && token?.Expiration > DateTime.Now)
             {
-                //await NavigationService.NavigateAsync("/WareHouseTabbedPage");
-                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+                await NavigationService.NavigateAsync("/MdaMasterDetailPage/NavigationPage/WareHouseTabbedPage");
+                //await NavigationService.NavigateAsync("LoginPage");
             }
             else
             {
-                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+                await NavigationService.NavigateAsync("LoginPage");
             }
         }
 
@@ -48,6 +49,8 @@ namespace MDAProject.Prism
             containerRegistry.RegisterForNavigation<WareHouseTabbedPage, WareHouseTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<InventoryPage, InventoryPageViewModel>();
             containerRegistry.RegisterForNavigation<DevicesPage, DevicesPageViewModel>();
+            containerRegistry.RegisterForNavigation<MdaMasterDetailPage, MdaMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
         }
     }
 }

@@ -110,7 +110,7 @@ namespace MDAProject.Prism.ViewModels
 
             var token = response.Result;
             var response2 = await _apiService.GetWareHoyseManagerByEmailAsync(url, "api", "/WareHouseManagers/GetWareHouseManagerByEmail", "bearer", token.Token, Email);
-            var devices = await _apiService.GetDeviceByWareHouseAsync(url, "api", "/WareHouseManagers/GetDevicesByWareHouse", "bearer", token.Token, 1);
+            var response3 = await _apiService.GetDeviceByWareHouseAsync(url, "api", "/WareHouseManagers/GetDevicesByWareHouse", "bearer", token.Token, 1);
             if (!response2.IsSuccess)
             {
                 IsRunning = false;
@@ -120,13 +120,19 @@ namespace MDAProject.Prism.ViewModels
             }
 
             var warehousemanager = response2.Result;
+            var devices = response3.Results;
             //var devices = warehousemanager.Inventories.
             Settings.WareHouseManager = JsonConvert.SerializeObject(warehousemanager);
             Settings.Devices = JsonConvert.SerializeObject(devices);
             Settings.Token = JsonConvert.SerializeObject(token);
             Settings.IsRemembered = IsRemember;
 
-            await _navigationService.NavigateAsync("WareHouseTabbedPage");
+            var parameters = new NavigationParameters
+            {
+                { "warehousemanager", warehousemanager }                
+            };
+
+            await _navigationService.NavigateAsync("/MdaMasterDetailPage/NavigationPage/WareHouseTabbedPage");
             IsRunning = false;
             IsEnabled = true;
         }

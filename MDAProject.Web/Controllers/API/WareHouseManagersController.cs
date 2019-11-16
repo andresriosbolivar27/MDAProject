@@ -79,11 +79,11 @@ namespace MDAProject.Web.Controllers.API
                 CodeIntegral = d.CodeIntegral,
                 CodeValorar = d.CodeValorar,
                 Description = d.Description,
-                DeviceImages = d.DeviceImages?.Select(pi => new DeviceImageResponse
-                {
-                    Id = pi.Id,
-                    ImageUrl = pi.ImageFullPath
-                }).ToList(),
+                //DeviceImages = d.DeviceImages?.Select(pi => new DeviceImageResponse
+                //{
+                //    Id = pi.Id,
+                //    ImageUrl = pi.ImageFullPath
+                //}).ToList(),
                 DeviceType = d.DeviceType.DeviceTypeName,
                 IsActive = d.IsActive,
                 SerialNumber = d.SerialNumber
@@ -132,20 +132,20 @@ namespace MDAProject.Web.Controllers.API
                         CodeIntegral = d.CodeIntegral,
                         CodeValorar = d.CodeValorar,
                         Description = d.Description,
-                        DeviceImages = d.DeviceImages?.Select(pi => new DeviceImageResponse
-                        {
-                            Id = pi.Id,
-                            ImageUrl = pi.ImageFullPath
-                        }).ToList(),
+                        //DeviceImages = d.DeviceImages?.Select(pi => new DeviceImageResponse
+                        //{
+                        //    Id = pi.Id,
+                        //    ImageUrl = pi.ImageFullPath
+                        //}).ToList(),
                         DeviceType = d.DeviceType.DeviceTypeName,
                         Id = d.Id,
-                        Movements = d.Movements?.Select(m => new MovementResponse 
-                        {
-                            DateMovement = m.DateMovement,
+                        //Movements = d.Movements?.Select(m => new MovementResponse 
+                        //{
+                        //    DateMovement = m.DateMovement,
                             
-                            MovementType = m.MovementType.MovementTypeName,
-                            Responsible = m.WarehouseManager.User.FullName
-                        }).ToList(),
+                        //    MovementType = m.MovementType.MovementTypeName,
+                        //    Responsible = m.WarehouseManager.User.FullName
+                        //}).ToList(),
                         SerialNumber = d.SerialNumber
                     }).ToList(),
                    
@@ -174,11 +174,11 @@ namespace MDAProject.Web.Controllers.API
                 CodeIntegral = device.CodeIntegral,
                 CodeValorar  = device.CodeValorar,
                 Description = device.Description ,
-                DeviceImages = device.DeviceImages?.Select(pi => new DeviceImageResponse
-                {
-                    Id = pi.Id,
-                    ImageUrl = pi.ImageFullPath
-                }).ToList(),
+                //DeviceImages = device.DeviceImages?.Select(pi => new DeviceImageResponse
+                //{
+                //    Id = pi.Id,
+                //    ImageUrl = pi.ImageFullPath
+                //}).ToList(),
                 DeviceType = device.DeviceType.DeviceTypeName,
                 SerialNumber = device.SerialNumber,
             };

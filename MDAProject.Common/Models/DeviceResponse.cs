@@ -23,21 +23,21 @@ namespace MDAProject.Common.Models
 
         public string DeviceType { get; set; }
 
-        public  ICollection<MovementResponse> Movements { get; set; }
+        //public  ICollection<MovementResponse> Movements { get; set; }
 
-        public ICollection<DeviceImageResponse> DeviceImages { get; set; }
+        //public ICollection<DeviceImageResponse> DeviceImages { get; set; }
 
-        public string FirstImage
-        {
-            get
-            {
-                if (DeviceImages == null || DeviceImages.Count == 0)
-                {
-                    return "https://mdaproject.azurewebsites.net/images/Devices/noImage.png";
-                }
+        //public string FirstImage
+        //{
+        //    get
+        //    {
+        //        if (DeviceImages == null || DeviceImages.Count == 0)
+        //        {
+        //            return "https://mdaproject.azurewebsites.net/images/Devices/noImage.png";
+        //        }
 
-                return DeviceImages.FirstOrDefault().ImageUrl;
-            }
-        }
+        //        return DeviceImages.FirstOrDefault().ImageUrl;
+        //    }
+        //}
     }
 }

@@ -51,7 +51,7 @@ namespace MDAProject.Prism.ViewModels
                 DeviceType = d.DeviceType,
                 IsActive = d.IsActive,
                 SerialNumber = d.SerialNumber
-            }).ToList()); ;
+            }).ToList());
         }
     }
 }
